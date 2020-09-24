@@ -6,6 +6,8 @@ library(shinybusy)
 library(stringr)
 library(lubridate)
 library(tibble)
+library(plotly)
+library(ggiraph)
 
 ### source the sources
 # Classes & Methods
@@ -14,6 +16,8 @@ library(tibble)
 
 source("modules/BigSelector.R")
 source("modules/StaticTable.R")
+source("modules/LinePlotWithFilters.R")
+source("modules/LinesSelector.R")
 
 #### This are default values for runing a complete beta ui ###
 

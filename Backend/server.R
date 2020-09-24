@@ -11,6 +11,11 @@ shinyServer(function(input, output, session) {
         StaticTableServer('token_table', token_table)
 
         ## Token Balances Plot
+        observeEvent(LinesSelectorServer('lines_to_plot'), {
+            lines_to_plot <- LinesSelectorServer('lines_to_plot')
+            print(lines_to_plot)
+            LinePlotWithFiltersServer('lines_with_filters_plot', lines_to_plot)
+        })
 
         ## Wallets Table
 

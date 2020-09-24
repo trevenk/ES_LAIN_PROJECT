@@ -29,7 +29,8 @@ body = dashboardBody(
                     width = 12,
                     boxPlus(
                         title = 'Token balances', status = "info", solidHeader = F, collapsible = T, closable = F, width = 12,
-                        LinePlotWithFiltersUI('token_balances_plot', lines_to_plot)
+                        LinePlotWithFiltersUI('lines_with_filters_plot'),
+                        column(width = 12, align = 'right', LinesSelectorUI('lines_to_plot'))
                     )
                 )
             )
