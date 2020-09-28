@@ -1,7 +1,7 @@
 header <- dashboardHeaderPlus(
     title = tagList(
-        span(class = "logo-lg", "shiny"),
-        img(src = "https://drive.google.com/file/d/1yYBQeebgXF-xcZ1ba9f3skEhlJI9AX0G/view?usp=sharing")),
+        span(class = "logo-lg", "Lain Project"),
+        img(src = "https://andres-crypto-bucket-ws.s3.amazonaws.com/logo24.png")),
     enable_rightsidebar = F
 )
 
@@ -17,22 +17,34 @@ sidebar <- dashboardSidebar(
 )
 
 body = dashboardBody(
+    tags$head(tags$link(rel = "shortcut icon", href = "https://andres-crypto-bucket-ws.s3.amazonaws.com/logo24.png")),
+    shinyDashboardThemes(theme = "grey_dark"),
     tabItems(
         tabItem(
             tabName = "main",
             fluidPage(
-                BigSelectorUI('token_selector', main_selector_options),
-                hr(),
-                StaticTableUI('token_table'),
+                h3("Evolución de los top holders"),
+                fluidRow(
+                    column(width = 7,
+                           BigSelectorUI('token_selector', main_selector_options),
+                           hr(),
+                           StaticTableUI('token_table')),
+                    column(width = 5, AllInfoTokenUI('token_all_info'))
+                ),
+                LinePlotWithFiltersUI('lines_with_filters_plot'),
+                column(width = 12, align = 'right', LinesSelectorUI('lines_to_plot')),
 
-                column(
-                    width = 12,
-                    boxPlus(
-                        title = 'Token balances', status = "info", solidHeader = F, collapsible = T, closable = F, width = 12,
-                        LinePlotWithFiltersUI('lines_with_filters_plot'),
-                        column(width = 12, align = 'right', LinesSelectorUI('lines_to_plot'))
-                    )
-                )
+                box(
+                    title = h3("Traced Holders"), status = "info", solidHeader = F, width = 12,
+                    collapsible = T, collapsed = T,
+                    StaticTableForEntityUI('traced_table')
+                ),
+
+                box(
+                    title = h3("Exchanges"), status = "info", solidHeader = F, width = 12, collapsible = T, collapsed = T,
+                    StaticTableForEntityUI('exchanges_table')
+                ),
+                br()
             )
         ),
         tabItem(
